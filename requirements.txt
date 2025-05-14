@@ -1,0 +1,10 @@
+streamlit
+altair
+pandas
+tqdm
+beautifulsoup4
+requests
+openai
+langchain
+sentence-transformers
+sqlite-utils

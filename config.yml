@@ -1,0 +1,8 @@
+default_search: "pixel art"
+pages: 2
+download_dir: "downloads"
+active_agents:
+  - scrape_opengameart
+  - verify_assets
+  - enhance_textures
+  - train_upscaler

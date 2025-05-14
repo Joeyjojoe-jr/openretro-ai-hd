@@ -1,0 +1,10 @@
+{
+  "file": "sample_texture.png",
+  "flag": "yellow",
+  "category": "textures",
+  "description": "Sample test texture for UI validation.",
+  "source_url": "https://opengameart.org/",
+  "license": "CC-BY 3.0",
+  "notes": "Generated sample for review",
+  "verified": false
+}
