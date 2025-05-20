@@ -1,47 +1,48 @@
-{
-  description = "Development environment for openretro-ai-hd";
+{ pkgs, ... }:
 
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    fenix.url = "github:nix-community/fenix";
-    # Optional: custom modules
-    # my-nix-module.url = "github:my-org/my-nix-module";
+{
+  # Use this stable channel
+  channel = "stable-23.11";
+
+  # Declare packages needed in your dev environment
+  packages = [
+    (pkgs.python311.withPackages (ps: with ps; [
+      pip
+      flask
+    ]))
+    pkgs.nixpkgs-fmt
+    pkgs.python311
+  ];
+
+  # Environment variables to set
+  env = {
+    PYTHONUNBUFFERED = "1";
   };
 
-  outputs = { self, nixpkgs, flake-parts, fenix, ... }:
-    flake-parts.lib.mkFlake { inherit self nixpkgs; } {
-      systems = [ "x86_64-linux" ];
+  # IDX-specific configuration
+  idx = {
+    extensions = [
+      "ms-python.python"
+    ];
 
-      perSystem = { pkgs, system, ... }: {
-        # Declare language + tool packages
-        packages = {
-          pythonEnv = pkgs.python311.withPackages (ps: with ps; [
-            pip
-            uv
-            flask
-          ]);
-        };
+    previews = {
+      enable = true;
+    };
 
-        # Developer shell setup
-        devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-            python311
-            nixpkgs-fmt
-            # Uncomment below if needed:
-            # pre-commit
-            # statix
-            # alejandra
-            # nodejs
-            # go
-          ];
-
-          shellHook = ''
-            echo "Welcome to the openretro-ai-hd dev environment!"
-            export PYTHONUNBUFFERED=1
-          '';
-        };
+    workspace = {
+      onCreate = {
+        setup-python = ''
+          python3 -m venv .venv
+          source .venv/bin/activate
+          pip install -r requirements.txt || true
+        '';
+      };
+      onStart = {
+        run-server = ''
+          source .venv/bin/activate
+          python main.py || echo "No main.py found"
+        '';
       };
     };
+  };
 }
-
