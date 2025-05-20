@@ -9,6 +9,8 @@
     (pkgs.python311.withPackages (ps: with ps; [
       pip
       flask
+      streamlit
+      pyyaml
     ]))
     pkgs.nixpkgs-fmt
     pkgs.python311
