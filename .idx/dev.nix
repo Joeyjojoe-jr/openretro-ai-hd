@@ -39,8 +39,8 @@
       };
       onStart = {
         run-server = ''
-          source .venv/bin/activate
-          python main.py || echo "No main.py found"
+ activate
+ python app.py || echo "No main.py found"
         '';
       };
     };
