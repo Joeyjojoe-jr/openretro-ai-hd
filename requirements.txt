@@ -10,3 +10,6 @@ sentence-transformers
 sqlite-utils
 flask
 uv
+realesrgan
+torch
+Pillow

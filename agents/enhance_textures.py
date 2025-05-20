@@ -31,5 +31,5 @@ class EnhanceTexturesAgent(BaseAgent):
 
             results.append((filename, True, None))
 
-        memory._save_memory()
+        memory.save_memory()
         return results

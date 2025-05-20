@@ -8,6 +8,7 @@ from agents.agent_registry import register_agent
 from realesrgan import RealESRGANer
 from basicsr.archs.rrdbnet_arch import RRDBNet
 import urllib.request
+from agents.utils.asset_memory import AssetMemory
 import json
 
 # Required dependencies: realesrgan, torch, Pillow. Install with: pip install realesrgan torch Pillow
@@ -65,6 +66,7 @@ class EnhanceTexturesSD(BaseAgent):
         Returns:
             A list of dictionaries summarizing the enhancement results.
         """
+        memory = AssetMemory("downloads/asset_memory.json")
         if not self.model:
             self.log("Model not loaded. Cannot run enhancement.", level="error")
             return []

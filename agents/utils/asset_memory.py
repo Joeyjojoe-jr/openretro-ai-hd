@@ -17,7 +17,7 @@ class AssetMemory:
                 pass
         return {}
 
-    def _save_memory(self):
+    def save_memory(self):
         with open(self.memory_path, "w") as f:
             json.dump(self.memory, f, indent=2)
 
@@ -28,7 +28,7 @@ class AssetMemory:
     def mark_seen(self, asset_url, meta):
         key = sha256(asset_url.encode()).hexdigest()
         self.memory[key] = meta
-        self._save_memory()
+        self.save_memory()
 
     def get_all_metadata(self):
         return list(self.memory.values())
