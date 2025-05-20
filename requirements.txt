@@ -8,3 +8,5 @@ openai
 langchain
 sentence-transformers
 sqlite-utils
+flask
+uv
